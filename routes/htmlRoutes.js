@@ -9,17 +9,29 @@ module.exports = function(app) {
     //     examples: dbExamples
     //   });
     // });
-    res.render("index");
+    res.render("start");
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
+  app.get("/home", function(req, res) {
+    res.render("home");
   });
+
+  app.get("/add", function(req, res) {
+    res.render("addform");
+  });
+
+  app.get("/all", function(req, res) {
+    res.render("allgames");
+  });
+
+  // // Load example page and pass in an example by id
+  // app.get("/example/:id", function(req, res) {
+  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+  //     res.render("example", {
+  //       example: dbExample
+  //     });
+  //   });
+  // });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {

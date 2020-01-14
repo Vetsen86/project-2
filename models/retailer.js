@@ -1,8 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Retailer = sequelize.define("Retailer", {
       name: DataTypes.STRING,
-      price: DataTypes.FLOAT,
-      expiresAt: DataTypes.DATEONLY
+      price: DataTypes.FLOAT
     });
 
     Retailer.associate = function(models) {

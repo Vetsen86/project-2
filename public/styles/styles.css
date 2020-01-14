@@ -1,3 +1,93 @@
-.list-group-item {
-  line-height: 2.5;
+body {
+  background-image: url("https://www.dualshockers.com/wp-content/uploads/2019/11/191128_DS_GamesoftheDecade_FeaturedImage.png");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.jumbotron {
+  /* background-color: #124261;
+  color: #b0b0b0; */
+  background-color: #e1e8e3;
+  color: #363b37;
+  width: 80%;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#startButton {
+  position: absolute;
+  background-color: #e1e8e3;
+  color: #363b37;
+  top: 75%;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  height: auto;
+  font-size: 2em;
+}
+
+#startButton:hover {
+  background-color: #aaadaa;
+}
+
+.navbar {
+  background-color: #e1e8e3;
+}
+
+.navbar-brand, .nav-item {
+  color: #363b37;
+}
+
+.nav-item {
+  border-radius: 3px;
+}
+
+.active {
+  background-color: #aaadaa;
+}
+
+.nav-item:hover {
+  color: #363b37;
+  background-color: #aaadaa;
+}
+
+#games {
+  margin-top: 5%;
+  background-color: #e1e8e3;
+  color: #363b37;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#gamesAccordion {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.game-button {
+  color: #363b37;
+}
+
+.game-button:hover {
+  color: #363b37;
+}
+
+#no-games {
+  text-align: center;
+  background-color: #e1e8e3;
+  color: #363b37;
+}
+
+#form-container {
+  margin-top: 5%;
+  background-color: #e1e8e3;
+  color: #363b37;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+form {
+  width: 70%;
 }
