@@ -37,12 +37,23 @@ module.exports = function(app) {
       where: { 
         name: req.body.retailerName,
         GameId: req.body.GameId
+      }
+    }).then(function(retailer) {
+      res.json(retailer);
+    });
+  });
+
+  app.post("/api/addplatform", function(req, res) {
+    db.Platform.findOrCreate({
+      where: {
+        name: req.body.platform,
+        RetailerId: req.body.RetailerId
       },
       defaults: {
         price: req.body.price
       }
-    }).then(function(retailer) {
-      res.json(retailer);
+    }).then(function(platform) {
+      res.json(platform);
     });
   });
 
@@ -69,19 +80,28 @@ module.exports = function(app) {
 
   app.post("/api/getfavoritegames", function(req, res) {
     db.Game.findAll({where: { [Op.or]: req.body.games },
-      include: [db.Retailer]
+      include: [
+        {
+          model: db.Retailer,
+          include: [
+            {
+              model: db.Platform
+            }
+          ]
+        }
+      ]
     })
       .then(function(favorites) {
         res.json(favorites);
       });
   });
 
-  app.put("/api/updateretailer", function(req, res) {
-    db.Retailer.update({ price: req.body.price },
+  app.put("/api/updateplatform", function(req, res) {
+    db.Platform.update({ price: req.body.price },
       {
         where: {
-          name: req.body.retailerName,
-          GameId: req.body.GameId
+          name: req.body.platform,
+          RetailerId: req.body.RetailerId
         }
       }).then(function(retailer) {
         res.json(retailer);
@@ -113,30 +133,19 @@ module.exports = function(app) {
 
   app.get("/api/all", function(req, res) {
     db.Game.findAll({
-      include: [db.Retailer]
+      include: [
+        {
+          model: db.Retailer,
+          include: [
+            {
+              model: db.Platform
+            }
+          ]
+        }
+      ]
     }).then(function(games) {
       res.json(games);
     })
   });
 
-  // Get all examples
-  // app.get("/api/examples", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.json(dbExamples);
-  //   });
-  // });
-
-  // Create a new example
-  // app.post("/api/examples", function(req, res) {
-  //   db.Example.create(req.body).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
-
-  // Delete an example by id
-  // app.delete("/api/examples/:id", function(req, res) {
-  //   db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
 };

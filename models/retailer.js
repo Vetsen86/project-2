@@ -1,7 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Retailer = sequelize.define("Retailer", {
-      name: DataTypes.STRING,
-      price: DataTypes.FLOAT
+      name: DataTypes.STRING
     });
 
     Retailer.associate = function(models) {
@@ -10,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
         }
       });
+      Retailer.hasMany(models.Platform);
     };
 
     return Retailer;

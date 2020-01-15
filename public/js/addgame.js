@@ -6,7 +6,8 @@ $(document).ready(function() {
         var addData = {
             gameName: $("#game").val().trim(),
             retailerName: $("#retailer").val().trim(),
-            price: $("#price").val()
+            price: $("#price").val(),
+            platform: $("#platform").val().trim()
         }
 
         if(!addData.gameName || !addData.retailerName || !addData.price) {
@@ -20,6 +21,7 @@ $(document).ready(function() {
         $("#game").val("");
         $("#retailer").val("");
         $("#price").val("");
+        $("#platform").val("");
 
         addGame(addData);
     });
@@ -38,25 +40,39 @@ $(document).ready(function() {
     function addRetailer(addData) {
         $.post("/api/addretailer", addData)
             .then(function(data) {
+                // if(!data[1]) {
+                //     updateRetailer(addData);
+                // } else {
+                //     alert("Retailer information added!");
+                // }
+                addData.RetailerId = data[0].id;
+                addPlatform(addData);
+            }).catch(function(err) {
+                console.log(err);
+            });
+    }
+
+    function addPlatform(addData) {
+        $.post("/api/addplatform", addData)
+            .then(function(data) {
                 if(!data[1]) {
-                    updateRetailer(addData);
+                    updatePlatform(addData);
                 } else {
-                    alert("Retailer information added!");
+                    alert("Platform information added!");
                 }
             }).catch(function(err) {
                 console.log(err);
             });
     }
 
-    function updateRetailer(addData) {
+    function updatePlatform(addData) {
 
         $.ajax({
             method: "PUT",
-            url: "/api/updateretailer",
+            url: "/api/updateplatform",
             data: addData
           }).then(function(data) {
-              alert("Retailer information updated");
-              console.log(data);
+              alert("Platform information updated");
           }).catch(function(err) {
               console.log(err);
           });

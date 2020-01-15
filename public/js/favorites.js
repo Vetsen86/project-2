@@ -79,14 +79,31 @@ $(document).ready(function() {
             for (var j = 0; j < games[i].Retailers.length; j++) {
                 var newRetailer = $("<p>");
 
-                var newText = games[i].Retailers[j].name + ": $" + games[i].Retailers[j].price;
+                var newRetailerText = games[i].Retailers[j].name + ": ";
 
-                var updatedAt = new Date(games[i].Retailers[j].updatedAt);
-
-                newText += "\nLast updated: " + (updatedAt.getMonth() + 1) + "/" + updatedAt.getDate() + "/" + updatedAt.getFullYear();
-
-                newRetailer.text(newText);
+                newRetailer.text(newRetailerText);
                 newCardBody.append(newRetailer);
+
+                var newPlatformList = $("<ul>");
+
+                for(var k = 0; k < games[i].Retailers[j].Platforms.length; k++) {
+
+                    var platform = games[i].Retailers[j].Platforms[k];
+
+                    var newPlatform = $("<li>");
+
+                    var platformText = platform.name + ": $" + platform.price;
+
+                    var updatedAt = new Date(platform.updatedAt);
+
+                    platformText += "\nLast updated: " + (updatedAt.getMonth() + 1) + "/" + updatedAt.getDate() + "/" + updatedAt.getFullYear();
+
+                    newPlatform.text(platformText);
+
+                    newPlatformList.append(newPlatform);
+                }
+
+                newCardBody.append(newPlatformList);
             }
 
             newCollapse.append(newCardBody);
